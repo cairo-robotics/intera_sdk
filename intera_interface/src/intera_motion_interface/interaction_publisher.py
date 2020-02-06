@@ -69,6 +69,11 @@ class InteractionPublisher(object):
             if repeat:
                 self.send_position_mode_cmd()
 
+    def external_rate_send_command(self, msg):
+        if isinstance(msg, InteractionOptions):
+            msg = msg.to_msg()
+        self.pub.publish(msg)
+
     def send_position_mode_cmd(self):
         '''
         Send a message to put the robot back into position mode
